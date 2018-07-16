@@ -39,4 +39,20 @@ func main() {
 		log.Println(err)
 	}
 	log.Println("got sum:", sum)
+
+
+	res, err := token.Total(&bind.CallOpts{Pending: true})
+	if err != nil {
+		log.Println(err)
+	}
+	
+	log.Println("got output:", res)
+
+	out, err := token.Add(auth, big.NewInt(100))
+	if err != nil {
+		log.Println(err)
+	}
+	
+	log.Println("got output:", out.Hash().String())
+
 }

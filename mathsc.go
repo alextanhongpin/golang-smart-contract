@@ -14,10 +14,10 @@ import (
 )
 
 // MathABI is the input ABI used to generate the binding from.
-const MathABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"_a\",\"type\":\"int256\"},{\"name\":\"_b\",\"type\":\"int256\"}],\"name\":\"sum\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}]"
+const MathABI = "[{\"constant\":true,\"inputs\":[],\"name\":\"total\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_val\",\"type\":\"int256\"}],\"name\":\"add\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_a\",\"type\":\"int256\"},{\"name\":\"_b\",\"type\":\"int256\"}],\"name\":\"sum\",\"outputs\":[{\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"
 
 // MathBin is the compiled bytecode used for deploying new contracts.
-const MathBin = `0x6080604052348015600f57600080fd5b50609d8061001e6000396000f300608060405260043610603e5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416639967062d81146043575b600080fd5b348015604e57600080fd5b50605b600435602435606d565b60408051918252519081900360200190f35b01905600a165627a7a72305820d687c9bf97bccc20b4f71eaec3179ba448683859e3c85b5bc97e3dc9e196c9e90029`
+const MathBin = `0x608060405234801561001057600080fd5b506000805560ed806100236000396000f30060806040526004361060525763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632ddbd13a8114605757806387db03b714607b5780639967062d146090575b600080fd5b348015606257600080fd5b50606960a8565b60408051918252519081900360200190f35b348015608657600080fd5b50606960043560ae565b348015609b57600080fd5b50606960043560243560bd565b60005481565b60008054820190819055919050565b01905600a165627a7a723058200c8cc82516ae032f2f523f0f80c20c3118e19f639def23dca35fa8ca8de939960029`
 
 // DeployMath deploys a new Ethereum contract, binding an instance of Math to it.
 func DeployMath(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *Math, error) {
@@ -198,4 +198,51 @@ func (_Math *MathSession) Sum(_a *big.Int, _b *big.Int) (*big.Int, error) {
 // Solidity: function sum(_a int256, _b int256) constant returns(int256)
 func (_Math *MathCallerSession) Sum(_a *big.Int, _b *big.Int) (*big.Int, error) {
 	return _Math.Contract.Sum(&_Math.CallOpts, _a, _b)
+}
+
+// Total is a free data retrieval call binding the contract method 0x2ddbd13a.
+//
+// Solidity: function total() constant returns(int256)
+func (_Math *MathCaller) Total(opts *bind.CallOpts) (*big.Int, error) {
+	var (
+		ret0 = new(*big.Int)
+	)
+	out := ret0
+	err := _Math.contract.Call(opts, out, "total")
+	return *ret0, err
+}
+
+// Total is a free data retrieval call binding the contract method 0x2ddbd13a.
+//
+// Solidity: function total() constant returns(int256)
+func (_Math *MathSession) Total() (*big.Int, error) {
+	return _Math.Contract.Total(&_Math.CallOpts)
+}
+
+// Total is a free data retrieval call binding the contract method 0x2ddbd13a.
+//
+// Solidity: function total() constant returns(int256)
+func (_Math *MathCallerSession) Total() (*big.Int, error) {
+	return _Math.Contract.Total(&_Math.CallOpts)
+}
+
+// Add is a paid mutator transaction binding the contract method 0x87db03b7.
+//
+// Solidity: function add(_val int256) returns(int256)
+func (_Math *MathTransactor) Add(opts *bind.TransactOpts, _val *big.Int) (*types.Transaction, error) {
+	return _Math.contract.Transact(opts, "add", _val)
+}
+
+// Add is a paid mutator transaction binding the contract method 0x87db03b7.
+//
+// Solidity: function add(_val int256) returns(int256)
+func (_Math *MathSession) Add(_val *big.Int) (*types.Transaction, error) {
+	return _Math.Contract.Add(&_Math.TransactOpts, _val)
+}
+
+// Add is a paid mutator transaction binding the contract method 0x87db03b7.
+//
+// Solidity: function add(_val int256) returns(int256)
+func (_Math *MathTransactorSession) Add(_val *big.Int) (*types.Transaction, error) {
+	return _Math.Contract.Add(&_Math.TransactOpts, _val)
 }
